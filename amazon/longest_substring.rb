@@ -26,22 +26,18 @@ require "test/unit"
 def longest_substring(s)
   return 0 if s.empty?
   substrings = Array.new
-  #sbstr = ''
   s.each_char.with_index do |char, j|
     sbstr = ''
     inner_str = s[j..s.length-1]
-    #p "--#{inner_str}--"
     inner_str.each_char.with_index do |ch, i|
       unless (sbstr.include?(ch))
         sbstr << ch
-        #p "#{sbstr}|#{ch}"
         # If also last char of input s 
         substrings << sbstr if (i == inner_str.length - 1)
       else
         substrings << sbstr
         sbstr = ch
       end
-    #p sbstr
     end
   end
   puts
@@ -59,9 +55,6 @@ def longest_substring(s)
   end
 end
 
-# longest_substring('abcabcbb')
-# longest_substring('bbbbb')
-# longest_substring('pwwkew')
 $rly_long_str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~
 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ 
 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ 
