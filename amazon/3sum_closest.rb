@@ -32,7 +32,6 @@ def three_sum_closest(nums, target)
   result
 end
 
-
 class TestSimpleNumber < Test::Unit::TestCase
   def test_simple
     assert_equal(2, three_sum_closest([-1,2,1,-4], 1))

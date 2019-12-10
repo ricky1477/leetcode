@@ -58,13 +58,41 @@ require "test/unit"
 # The stack data structure can come in handy here in representing this recursive structure of the problem. We can't really process this from the
 #  inside out because we don't have an idea about the overall structure. But, the stack can help us process this recursively i.e. from outside to inwards.
 
-
-def is_valid(s)
-    
+def is_valid(string)
+  stack = []
+  string.each_char do |char|
+    #p "char - #{char}"
+    if PARENS.key?(char)
+      stack << PARENS[char]
+      #p stack
+    else
+      current_open = stack.pop
+      # p "current_open|#{current_open}"
+      # p stack
+      return false unless char == current_open
+    end
+  end
+  stack.empty?
 end
+
+PARENS = {
+  '(' => ')',
+  '{' => '}',
+  '[' => ']'
+}.freeze
 
 class TestSimpleNumber < Test::Unit::TestCase
   def test_simple
-    assert_equal(2, is_valid([-1,2,1,-4], 1))
-  end 
+    assert_equal(true, is_valid("()"))
+    p '----'
+    assert_equal(true, is_valid("()[]{}"))
+    p '----'
+    assert_equal(false, is_valid("(]"))
+    p '----'
+    assert_equal(false, is_valid("([)]"))
+    p '----'
+    assert_equal(true, is_valid("{[]}"))
+    p '----'
+    assert_equal(true, is_valid("{{}[][[[]]]}"))
+  end
 end
