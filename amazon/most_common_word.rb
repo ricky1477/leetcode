@@ -9,8 +9,6 @@ require "test/unit"
 
 # Words in the list of banned words are given in lowercase, and free of punctuation.  Words in the paragraph are not case sensitive.  The answer is in lowercase.
 
- 
-
 # Example:
 
 # Input: 

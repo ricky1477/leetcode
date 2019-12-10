@@ -1,6 +1,6 @@
 require "test/unit"
 
-#https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2967/
+# https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2967/
 
 # 3Sum Closest
 # Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. 
