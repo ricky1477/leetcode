@@ -65,7 +65,7 @@ def is_valid_bst(root, min=nil, max=nil)
   end
 end
 
-class TestSimpleNumber < Test::Unit::TestCase
+class TestValidBST < Test::Unit::TestCase
   def test_simple
     #assert_equal(true, is_valid_bst([2,1,3]))
     root = TreeNode.new(2)
