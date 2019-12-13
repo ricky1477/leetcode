@@ -1,5 +1,7 @@
-# https://leetcode.com/problems/partition-labels/
+require 'test/unit'
+require 'byebug'
 
+# https://leetcode.com/problems/partition-labels/
 
 # 763. Partition Labels
 # Medium
@@ -26,22 +28,31 @@ def partition_labels(s)
     ch = s[i]
     hash[ch] = hash[ch].to_i + 1
   end
+  # p hash
   current_hash = Hash.new
   len = 0
   for i in (0...s.size) do
     is_valid = true
     ch = s[i]
     current_hash[ch] = current_hash[ch].to_i + 1
+    # p current_hash
     current_hash.each_key do |key|
       is_valid = is_valid && (current_hash[key].to_i == hash[key].to_i)
     end
     if is_valid
       current_hash = Hash.new
       partitions << len+1
+      # p partitions
       len = 0
     else
       len += 1
     end
   end
   return partitions
+end
+
+class TestPartitionLabels < Test::Unit::TestCase
+  def test_simple
+    assert_equal([9,7,8], partition_labels('ababcbacadefegdehijhklij'))
+  end 
 end

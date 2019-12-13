@@ -83,32 +83,32 @@ end
 # end
 
 def prison_after_n_days(cells, n)
-  temp = cells.dup
+  tmp = cells.dup
   n = (n - 1) % 14 + 1
+  p n
   n.times do
-    cells.each_with_index do |num, idx|
-        if idx == 0 || idx == cells.length - 1
-          temp[idx] = 0
+    cells.each_with_index do |num, i|
+        # Check first and last
+        if i == 0 || i == cells.length - 1
+          tmp[i] = 0
           next
         end
-
-        if cells[idx- 1] == 0 && cells[idx + 1] == 0 || cells[idx- 1] == 1 && cells[idx + 1] == 1
-            temp[idx] = 1
+        if (cells[i-1] == 0 && cells[i+1] == 0) || (cells[i-1] == 1 && cells[i+1] == 1)
+          tmp[i] = 1
         else
-          temp[idx] = 0
+          tmp[i] = 0
         end
     end
-    cells = temp.dup
+    cells = tmp.dup
   end
-  cells = temp.dup
+  cells = tmp.dup
 end
 
 class TestPrison < Test::Unit::TestCase
   def test_simple
-    p '----'
     assert_equal([0, 1, 1, 0, 0, 0, 0, 0], prison_after_n_days([0,1,0,1,1,0,0,1],1))
     assert_equal([0, 0, 0, 0, 1, 1, 1, 0], prison_after_n_days([0,1,0,1,1,0,0,1],2))
-
+    assert_equal([0, 1, 1, 0, 0, 1, 0, 0], prison_after_n_days([0,1,0,1,1,0,0,1],3))
   end 
 end
 
