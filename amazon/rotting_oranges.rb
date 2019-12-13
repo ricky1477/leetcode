@@ -36,6 +36,7 @@ require "test/unit"
 # 1 <= grid[0].length <= 10
 # grid[i][j] is only 0, 1, or 2.
 
+=begin
 def oranges_rotting(grid)
   return 0 if count_fresh(grid) == 0
   count = 1
@@ -101,6 +102,56 @@ def find_all_rotten(grid)
   end
   return rotten
 end
+=end
+
+def oranges_rotting(grid)
+  t = 0
+  while count_fresh(grid) > 0
+    # find all 2s
+    changed = false
+    rotten = find_all_rotten(grid)
+    rotten.each do |pos|
+      if (pos.first+1 < grid.size && grid[pos.first+1][pos.last] == 1)
+        grid[pos.first+1][pos.last] = 2
+        changed = true
+      end
+      if (pos.last+1 < grid.first.size && grid[pos.first][pos.last+1] == 1)
+        grid[pos.first][pos.last+1] = 2
+        changed = true
+      end
+      if (pos.first-1 >= 0 && grid[pos.first-1][pos.last] == 1)
+        grid[pos.first-1][pos.last] = 2
+        changed = true
+      end
+      if (pos.last-1 >= 0 && grid[pos.first][pos.last-1] == 1)
+        grid[pos.first][pos.last-1] = 2
+        changed = true
+      end
+    end
+    # p grid
+    break if !changed
+    t+=1
+  end
+  return count_fresh(grid) == 0 ? t:-1
+end
+
+def count_fresh(grid)
+  count_fresh = 0
+  grid.each do |row|
+    count_fresh += row.count{|x| x == 1}
+  end
+  return count_fresh
+end
+
+def find_all_rotten(grid)
+  rotten = []
+  grid.each_with_index do |row,i|
+    row.each_with_index do |x,j|
+      rotten << [i,j] if x == 2
+    end
+  end
+  return rotten
+end
 
 
 class TestSimpleNumber < Test::Unit::TestCase
@@ -110,4 +161,5 @@ class TestSimpleNumber < Test::Unit::TestCase
     assert_equal(-1, oranges_rotting([[2,1,1],[0,1,1],[1,0,1]]))
     assert_equal(0, oranges_rotting([[0,2]]))
     #assert_equal(1, oranges_rotting([[2,1,0,2]])) DOESN"T WORK for non-square matrices
+  end
 end

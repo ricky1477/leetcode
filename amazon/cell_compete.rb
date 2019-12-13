@@ -9,7 +9,6 @@ require "test/unit"
 
 
 def cellCompete(states, days)
-  # WRITE YOUR CODE HERE
   a=*(1..days).each do |int|
     #p int
     hash = Hash[(0...states.size).zip states]
@@ -27,8 +26,89 @@ end
 
 class TestCellCompete < Test::Unit::TestCase
   def test_simple
-    assert_equal([0,1,0,0,1,0,1,0], cellCompete([1,0,0,0,0,1,0,0],1))
-    assert_equal([0,0,0,0,0,1,1,0], cellCompete([1,1,1,0,1,1,1,1],2))
-    assert_equal([0,0,0,0,1,1,1,1], cellCompete([1,1,1,0,1,1,1,1],3))
+    # assert_equal([0,1,0,0,1,0,1,0], cellCompete([1,0,0,0,0,1,0,0],1))
+    # assert_equal([0,0,0,0,0,1,1,0], cellCompete([1,1,1,0,1,1,1,1],2))
+    # assert_equal([0,0,0,0,1,1,1,1], cellCompete([1,1,1,0,1,1,1,1],3))
   end 
 end
+
+
+# 957. Prison Cells After N Days
+# Medium
+# There are 8 prison cells in a row, and each cell is either occupied or vacant.
+
+# Each day, whether the cell is occupied or vacant changes according to the following rules:
+
+# If a cell has two adjacent neighbors that are both occupied or both vacant, then the cell becomes occupied.
+# Otherwise, it becomes vacant.
+# (Note that because the prison is a row, the first and the last cells in the row can't have two adjacent neighbors.)
+
+# We describe the current state of the prison in the following way: cells[i] == 1 if the i-th cell is occupied, else cells[i] == 0.
+
+# Given the initial state of the prison, return the state of the prison after N days (and N such changes described above.)
+
+# Example 1:
+# Input: cells = [0,1,0,1,1,0,0,1], N = 7
+# Output: [0,0,1,1,0,0,0,0]
+# Explanation: 
+# The following table summarizes the state of the prison on each day:
+# Day 0: [0, 1, 0, 1, 1, 0, 0, 1]
+# Day 1: [0, 1, 1, 0, 0, 0, 0, 0]
+# Day 2: [0, 0, 0, 0, 1, 1, 1, 0]
+# Day 3: [0, 1, 1, 0, 0, 1, 0, 0]
+# Day 4: [0, 0, 0, 0, 0, 1, 0, 0]
+# Day 5: [0, 1, 1, 1, 0, 1, 0, 0]
+# Day 6: [0, 0, 1, 0, 1, 1, 0, 0]
+# Day 7: [0, 0, 1, 1, 0, 0, 0, 0]
+
+# Example 2:
+# Input: cells = [1,0,0,1,0,0,1,0], N = 1000000000
+# Output: [0,0,1,1,1,1,1,0]
+
+
+###Time Limit Exceeded (TLE)
+# def prison_after_n_days(cells, n)
+#   a=*(1..n).each do |int|
+#     #p int
+#     hash = Hash[(0...cells.size).zip cells]
+#     hash[-1] = nil
+#     hash[cells.size] = nil
+#     cells.each.with_index do |cell, i|
+#       #p "#{hash[i-1]}|#{cell}|#{hash[i+1]}"
+#       hash[i-1] == hash[i+1] ? cells[i] = 1 : cells[i] = 0
+#     end
+#     #p cells
+#   end
+#   return cells    
+# end
+
+def prison_after_n_days(cells, n)
+  temp = cells.dup
+  n = (n - 1) % 14 + 1
+  n.times do
+    cells.each_with_index do |num, idx|
+        if idx == 0 || idx == cells.length - 1
+          temp[idx] = 0
+          next
+        end
+
+        if cells[idx- 1] == 0 && cells[idx + 1] == 0 || cells[idx- 1] == 1 && cells[idx + 1] == 1
+            temp[idx] = 1
+        else
+          temp[idx] = 0
+        end
+    end
+    cells = temp.dup
+  end
+  cells = temp.dup
+end
+
+class TestPrison < Test::Unit::TestCase
+  def test_simple
+    p '----'
+    assert_equal([0, 1, 1, 0, 0, 0, 0, 0], prison_after_n_days([0,1,0,1,1,0,0,1],1))
+    assert_equal([0, 0, 0, 0, 1, 1, 1, 0], prison_after_n_days([0,1,0,1,1,0,0,1],2))
+
+  end 
+end
+
