@@ -86,6 +86,10 @@ def my_atoi(str)
     if negative
       # Convert string to number
       # '3'.ord-48 => 3
+      # ord -> Returns the codepoint of the first character of the string, 
+      # assuming a single-byte character encoding
+      # https://apidock.com/rails/String/ord
+      # https://en.wikipedia.org/wiki/Code_point
       number-=(num.ord-48)*10**position
     else
       number+=(num.ord-48)*10**position
