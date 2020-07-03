@@ -42,21 +42,22 @@ end
 # @param {TreeNode} root
 # @return {TreeNode}
 def bst_to_gst(root)
-  # p root
   @sum = 0
-  post_order_traverse(root)
+  rev_in_order_traverse(root)
   root
 end
 
-# Reverse order traversal
-def post_order_traverse(root)
+# Reverse in-order traversal
+def rev_in_order_traverse(root)
   return nil if root.nil?
   
-  post_order_traverse(root.right)
-  root.val += @sum
-  @sum = root.val
-
-  post_order_traverse(root.left)
+  rev_in_order_traverse(root.right)
+  
+  # Update leaf with sum
+  @sum += root.val
+  root.val = @sum
+  
+  rev_in_order_traverse(root.left)
 end
 
 # https://coderpad.io/JKD4M66R

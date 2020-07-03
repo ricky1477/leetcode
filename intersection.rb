@@ -41,10 +41,10 @@ def intersection(nums1, nums2)
   end
 
   small.delete_if {|int| !big.include?(int)}
-  #set.delete_if {|int| int.}
- 
   small.to_a
  end
+
+ # O(n)
 
 # https://coderpad.io/JKD4M66R
 # https://app.slack.com/client/TA4657GMC/CA6DT4UGP

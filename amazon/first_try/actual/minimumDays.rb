@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'byebug'
+require 'set'
 
 def minimumDays(rows, columns, grid)
   # WRITE YOUR CODE HERE
