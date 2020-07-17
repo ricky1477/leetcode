@@ -22,56 +22,24 @@ require 'set'
 # find(6) -> false
 
 class TwoSum
-=begin
-  Initialize your data structure here.
-=end
+  # Initialize your data structure here.
   def initialize()
     @values = {}
   end
   
-=begin
-  Add the number to an internal data structure..
-  :type number: Integer
-  :rtype: Void
-=end
+  # Add the number to an internal data structure..
+  # :type number: Integer
+  # :rtype: Void
   # O(1)
   def add(number)
     @values.key?(number) ? @values[number] += 1 : @values[number] = 1
   end
   
-=begin
-  Find if there exists any pair of numbers which sum is equal to the value.
-  :type value: Integer
-  :rtype: Boolean
-=end
-  # O(n)
-  # def find(value)
-  #   #return false # unless @values.length > 1
-  #   @values.each do |k, v|
-  #     p '-----'
-  #     p value
-  #     p k
-  #     p "#{value - k}"
-  #     p (value+k)
-  #     # return true if @values.key?(value - k)
-  #     if @values.key?(value+k)
-  #       p 'found key'
-  #       # value and complement are NOT equal
-  #       if value != (value+k)
-  #         p 'not equal'
-  #         return true 
-  #       # value and complement ARE equal
-  #       else
-  #         p 'complement is equal'
-  #         # return true if @values[value - k] >= 2
-  #         return true if @values[(value+k)] >= 2
+  # Find if there exists any pair of numbers which sum is equal to the value.
+  # :type value: Integer
+  # :rtype: Boolean
 
-  #         #return false if 
-  #       end
-  #     end
-  #   end
-  #   false
-  # end
+  # O(n)
   def find(value)
     @values.each do |k, v|
       complement = value - k

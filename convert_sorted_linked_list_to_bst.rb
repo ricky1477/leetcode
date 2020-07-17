@@ -108,6 +108,14 @@ class TestClass < Test::Unit::TestCase
           )
         )
       )
+      # new_list = ListNode.new(1, nil)
+      # cur = new_list
+      # cur.next = ListNode.new(2, nil)
+      # cur = cur.next
+      # cur.next = ListNode.new(3, nil)
+      # cur = cur.next
+      # p new_list
+      # p '****'
     assert_equal(3, sorted_list_to_bst(head))
   end 
 end
