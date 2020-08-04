@@ -84,8 +84,8 @@ def traverse(node)
       @tail = node
     else
       @tail.right = node
-      node.left = @tail;
-      @tail = node;
+      node.left = @tail
+      @tail = node
     end
     
     traverse(node.right)

@@ -1,4 +1,6 @@
 # https://leetcode.com/articles/binary-tree-level-order-traversal/
+# https://leetcode.com/problems/binary-tree-level-order-traversal/
+# Medium
 
 
 def level_order(root)
@@ -14,5 +16,5 @@ def level_order(root)
     queue << [node.right, level + 1] if node.right
     queue << [node.left, level + 1] if node.left
   end
-  res.map(&:max)
+  res
 end

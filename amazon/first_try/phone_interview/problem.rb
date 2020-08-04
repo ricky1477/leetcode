@@ -6,6 +6,8 @@
 # local copy resides in client
 # return product_id for getter
 
+# https://www.geeksforgeeks.org/design-a-data-structure-that-supports-insert-delete-search-and-getrandom-in-constant-time/
+
 class List
   def initialize
     HTTPCLIENT.get('backend_service')

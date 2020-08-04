@@ -43,6 +43,15 @@ def insert_into_bst(root, val)
   root
 end
 
+# Pattern for searching BST
+# while(root)
+#   val = root.val
+#   # Find closest to target
+#   closest = (val - target).abs < (closest - target).abs ? val : closest
+#   # Go left if target is less than root.val, go right otherwise 
+#   root = target < root.val ? root.left : root.right
+# end
+
 def search_bst_distance(root, val)
   return nil if root.nil?
   @distance += 1
