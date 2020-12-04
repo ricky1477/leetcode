@@ -1,3 +1,7 @@
+require 'test/unit'
+require 'byebug'
+require 'set'
+
 # https://uplevel.interviewkickstart.com/resource/rc-codingproblem-5660-31446-7-99
 
 # Merge One Sorted Array Into Another
@@ -97,33 +101,73 @@
 # 6
 
 # Complete the merger_first_into_second function below.
+# def merger_first_into_second(arr1, arr2)
+#   i = arr1.length - 1 
+#   j = i
+#   k = arr2.length - 1
+#   # p i
+#   # p j
+#   # p k
+#   # p '---'
+  
+#   while (i >= 0 && j >= 0)
+#       #p arr1[i]
+#       #p arr2[j]
+      
+#       if arr2[j] > arr1[i]
+#           arr2[k] = arr2[j]
+#           j -= 1
+#       else
+#           arr2[k] = arr1[i]
+#           i -= 1  
+#       end
+      
+#       k -= 1 
+#       # p "#{i}|#{j}"
+#       # p arr2
+#   end
+  
+#   arr2[0] = (i==0 ? arr1[i] : arr2[j])
+#   # p arr2
+#   # p '****'
+# end
+
 def merger_first_into_second(arr1, arr2)
-  i = arr1.length - 1 
+  p arr1
+  p arr2
+  p '----'
+
+  i = arr1.length-1
   j = i
-  k = arr2.length - 1
-  # p i
-  # p j
-  # p k
-  # p '---'
-  
-  while (i >= 0 && j >= 0)
-      #p arr1[i]
-      #p arr2[j]
-      
-      if arr2[j] > arr1[i]
-          arr2[k] = arr2[j]
-          j -= 1
-      else
-          arr2[k] = arr1[i]
-          i -= 1  
-      end
-      
-      k -= 1 
-      # p "#{i}|#{j}"
-      # p arr2
+  k = arr2.length-1
+  while j>=0 && i>=0 do
+    if arr1[i] > arr2[j]
+      arr2[k] = arr1[i]
+      i -= 1
+    else
+      arr2[k] = arr2[j]
+      j -= 1
+    end
+    k -= 1
   end
-  
-  arr2[0] = (i==0 ? arr1[i] : arr2[j])
-  # p arr2
-  # p '****'
+   
+  while i>=0 do
+    arr2[k] = arr1[i]
+    i -= 1
+    k -= 1
+  end
+   
+  while j>=0 do
+    arr2[k] = arr2[j]
+    j -= 1
+    k -= 1
+  end
+  return arr2
 end
+
+class TestClass < Test::Unit::TestCase
+  def test_simple
+    assert_equal([1, 2, 3, 4, 5, 6], merger_first_into_second([1, 3, 5], [2, 4, 6, 0, 0, 0]))
+    assert_equal([1, 2], merger_first_into_second([2],[1, 0]))
+  end
+end 
