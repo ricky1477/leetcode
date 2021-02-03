@@ -37,15 +37,34 @@ end
 # @param {ListNode} head
 # @return {ListNode}
 def swap_pairs(head)
-  p head
+  return head unless head && head.next
+  first_node = head
+  second_node = head.next
+  first_node.next = swap_pairs(second_node.next)
+  second_node.next = first_node
+  second_node
+end
+
+def print(head)
+  res = Array.new
+  cur = head
+  while cur
+    res << cur.val
+    cur = cur.next
+  end
+  res
 end
 
 class TestClass < Test::Unit::TestCase
   def test_simple
-    head = ListNode.new(2, ListNode.new(1, ListNode.new(4, ListNode.new(3, nil))))
-    head.next = ListNode.new(1)
-    head.next.next = ListNode.new(4)
-    head.next.next.next = ListNode.new(3)
-    assert_equal(nil, swap_pairs(head))
+    head = ListNode.new(1, ListNode.new(2, ListNode.new(3, ListNode.new(4, nil))))
+    assert_equal([1,2,3,4], print(head))
+    res = swap_pairs(head)
+    assert_equal([2,1,4,3], print(res))
+
+    head = ListNode.new(1, ListNode.new(2, ListNode.new(3, ListNode.new(4, ListNode.new(5, nil)))))
+    assert_equal([1,2,3,4,5], print(head))
+    res = swap_pairs(head)
+    assert_equal([2,1,4,3,5], print(res))
   end
 end 
