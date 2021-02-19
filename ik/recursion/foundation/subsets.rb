@@ -26,14 +26,30 @@ require 'set'
 # @return {Integer[][]}
 def subsets(nums)
   result = Array.new
+  slate = Array.new
   helper(nums, 0, result, slate)
-    
+  return result
+end
+
+def helper(nums, idx, result, slate)
+  if (idx == nums.length)
+    result.push(slate.dup)
+    return
+  end
+
+  # Include
+  slate.push(nums[idx])
+  helper(nums, idx+1, result, slate)
+  slate.pop
+
+  # Exclude
+  helper(nums, idx+1, result, slate)
 end
 
 
 class TestClass < Test::Unit::TestCase
   def test_simple
-    assert_equal([[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]], subsets([1,2,3]))
-    assert_equal([[],[0]], subsets([0]))
+    assert_equal([[1, 2, 3], [1, 2], [1, 3], [1], [2, 3], [2], [3], []], subsets([1,2,3]))
+    assert_equal([[0],[]], subsets([0]))
   end
 end 
