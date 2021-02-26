@@ -24,6 +24,7 @@ require 'set'
 
 # @param {Integer[]} nums
 # @return {Integer[][]}
+# T(n) = O(2^n)
 def subsets(nums)
   result = Array.new
   slate = Array.new
